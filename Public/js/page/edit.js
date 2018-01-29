@@ -118,7 +118,7 @@ $(function() {
 	  imageUploadURL: "?s=home/page/uploadImg",
 	  fileUpload: true,
 	  fileUploadURL: "?s=home/page/uploadFile",
-	  fileFormats: ["txt", "xlsx", "xls", "docx", "doc", "TXT", "XLXS", "XLX", "DOCX", "DOC"],
+	  fileFormats: ["txt", "xlsx", "xls", "docx", "doc", "pdf", "TXT", "XLXS", "XLX", "DOCX", "DOC", "PDF"],
 	  onload: function() {
       this.addKeyMap(keyMap);
     }
