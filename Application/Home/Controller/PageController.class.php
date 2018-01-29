@@ -174,11 +174,11 @@ class PageController extends BaseController {
 			echo json_encode(array("url"=>$url,"success"=>1));
 		}else{
 			$upload = new \Think\Upload();// 实例化上传类
-			$upload->maxSize  = 3145728 ;// 设置附件上传大小
+			$upload->maxSize  = 5242880 ;// 设置附件上传大小 5M
 			$upload->allowExts  = array('txt', 'xlxs', 'xlx', 'docx', 'doc');// 设置附件上传类型
 			$upload->rootPath = './Public/Uploads/';// 设置附件上传目录
 			$upload->savePath = 'Atta/';// 设置附件上传子目录
-			$info = $upload->upload() ;
+			$info = $upload->upload();
 			if(!$info) {// 上传错误提示错误信息
 				echo json_encode(array("message"=>$upload->getError(),"success"=>500));
 //				$this->error($upload->getError());
