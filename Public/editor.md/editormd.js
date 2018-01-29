@@ -69,7 +69,7 @@
             "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
             "h1", "h2", "h3", "h4", "h5", "h6", "|", 
             "list-ul", "list-ol", "hr", "|",
-            "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+            "link", "reference-link", "image", "file", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
             "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
             "help", "info"
         ],
@@ -146,8 +146,11 @@
         onpreviewscroll      : function() {},
         
         imageUpload          : false,
+        fileUpload           : false,
         imageFormats         : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        fileFormats          : ["txt"],
         imageUploadURL       : "",
+        fileUploadURL        : "",
         crossDomainUpload    : false,
         uploadCallbackURL    : "",
         
@@ -206,6 +209,7 @@
             link             : "fa-link",
             "reference-link" : "fa-anchor",
             image            : "fa-picture-o",
+	          file             : "fa-file-o",
             code             : "fa-code",
             "preformatted-text" : "fa-file-code-o",
             "code-block"     : "fa-file-code-o",
@@ -252,6 +256,7 @@
                 link             : "链接",
                 "reference-link" : "引用链接",
                 image            : "添加图片",
+                file             : "添加附件",
                 code             : "行内代码",
                 "preformatted-text" : "预格式文本 / 代码块（缩进风格）",
                 "code-block"     : "代码块（多语言风格）",
@@ -301,6 +306,16 @@
                     imageURLEmpty    : "错误：图片地址不能为空。",
                     uploadFileEmpty  : "错误：上传的图片不能为空。",
                     formatNotAllowed : "错误：只允许上传图片文件，允许上传的图片文件格式有："
+                },
+                file : {
+                    title    : "添加附件",
+                    url      : "附件地址",
+                    link     : "附件链接",
+                    alt      : "附件标题",
+                    uploadButton     : "本地上传",
+                    fileURLEmpty     : "错误：附件地址不能为空。",
+                    uploadFileEmpty  : "错误：上传的附件不能为空。",
+                    formatNotAllowed : "错误：只允许上传特定类型文件，允许上传的文件格式有："
                 },
                 preformattedText : {
                     title             : "添加预格式文本或代码块", 
@@ -3105,6 +3120,10 @@
 
         image : function() {
             this.executePlugin("imageDialog", "image-dialog/image-dialog");
+        },
+
+        file : function() {
+            this.executePlugin("fileDialog", "file-dialog/file-dialog");
         },
         
         code : function() {

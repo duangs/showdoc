@@ -157,6 +157,39 @@ class PageController extends BaseController {
 
     }
 
+	//上传附件
+	public function uploadFile(){
+		$qiniu_config = C('UPLOAD_SITEIMG_QINIU') ;
+		if ($_FILES['editormd-file-file']['name'] == 'blob') {
+			$_FILES['editormd-file-file']['name'] .= '.txt';
+		}
+		if (strstr(strtolower($_FILES['editormd-file-file']['name']), ".php") ) {
+			return false;
+		}
+		if (!empty($qiniu_config['driverConfig']['secrectKey'])) {
+			//上传到七牛
+			$Upload = new \Think\Upload(C('UPLOAD_SITEIMG_QINIU'));
+			$info = $Upload->upload($_FILES);
+			$url = $info['editormd-file-file']['url'] ;
+			echo json_encode(array("url"=>$url,"success"=>1));
+		}else{
+			$upload = new \Think\Upload();// 实例化上传类
+			$upload->maxSize  = 3145728 ;// 设置附件上传大小
+			$upload->allowExts  = array('txt', 'xlxs', 'xlx', 'docx', 'doc');// 设置附件上传类型
+			$upload->rootPath = './Public/Uploads/';// 设置附件上传目录
+			$upload->savePath = 'Atta/';// 设置附件上传子目录
+			$info = $upload->upload() ;
+			if(!$info) {// 上传错误提示错误信息
+				echo json_encode(array("message"=>$upload->getError(),"success"=>500));
+//				$this->error($upload->getError());
+			}else{// 上传成功 获取上传文件信息
+				$url = get_domain().__ROOT__.substr($upload->rootPath,1).$info['editormd-file-file']['savepath'].$info['editormd-file-file']['savename'] ;
+				echo json_encode(array("url"=>$url,"success"=>1));
+			}
+		}
+
+	}
+
     public function diff(){
         $login_user = $this->checkLogin();
         $page_history_id = I("page_history_id/d");

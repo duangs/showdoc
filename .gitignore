@@ -1,3 +1,5 @@
+.idea/
+install.lock
 Application/Runtime/
 server/Application/Runtime/
 

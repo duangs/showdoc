@@ -3176,6 +3176,10 @@
         image : function() {
             this.executePlugin("imageDialog", "image-dialog/image-dialog");
         },
+
+        file : function() {
+            this.executePlugin("fileDialog", "file-dialog/file-dialog");
+        },
         
         code : function() {
             var cm        = this.cm;

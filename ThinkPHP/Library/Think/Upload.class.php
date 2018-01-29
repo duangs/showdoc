@@ -195,12 +195,15 @@ class Upload {
 
             /* 对图像文件进行严格检测 */
             $ext = strtolower($file['ext']);
-            if(in_array($ext, array('gif','jpg','jpeg','bmp','png','swf'))) {
-                $imginfo = getimagesize($file['tmp_name']);
-                if(empty($imginfo) || ($ext == 'gif' && empty($imginfo['bits']))){
+            if(!in_array($ext, array('gif','jpg','jpeg','bmp','png','swf','txt','doc','docx','xlsx','xls'))) {
+//	            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+//	            $mime = finfo_file($finfo, $file['tmp_name']);
+//	            var_dump($mime);
+//                $imginfo = getimagesize($file['tmp_name']);
+//                if(empty($imginfo) || ($ext == 'gif' && empty($imginfo['bits']))){
                     $this->error = '非法图像文件！';
                     continue;
-                }
+//                }
             }
 
             /* 保存文件 并记录保存成功的文件 */

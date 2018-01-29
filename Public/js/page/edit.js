@@ -115,8 +115,11 @@ $(function() {
     htmlDecode : "style,script,iframe|filterXSS",//解析html
     imageUpload: true,
     imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp", "JPG", "JPEG", "GIF", "PNG", "BMP", "WEBP"],
-    imageUploadURL: "?s=home/page/uploadImg",
-    onload: function() {
+	  imageUploadURL: "?s=home/page/uploadImg",
+	  fileUpload: true,
+	  fileUploadURL: "?s=home/page/uploadFile",
+	  fileFormats: ["txt", "xlsx", "xls", "docx", "doc", "TXT", "XLXS", "XLX", "DOCX", "DOC"],
+	  onload: function() {
       this.addKeyMap(keyMap);
     }
   });
